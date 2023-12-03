@@ -112,4 +112,11 @@ int main() {
     power += prod;
   }
   printf("%d\n", power);
+
+  // Free memory like a nice human.
+  for (int i = 0; i < gc.ct; ++i) {
+    delete_dynarr_Game(&gc.games[i]);
+  }
+  delete_dynarr_GameCollection(&gc);
+  destroy_psed(&psed);
 }

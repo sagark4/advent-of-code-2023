@@ -94,4 +94,7 @@ const char *next(Psed *ppsed) {
     }
   }
 }
-void destroy_psed(Psed *ppsed) { printf("TODO:"); }
+void destroy_psed(Psed *ppsed) {
+  free((void *)ppsed->plengths);
+  free((void *)ppsed->history);
+}
