@@ -8,10 +8,18 @@ char last_nth(Psed *ppsed, int n) {
   return ppsed->history[(ppsed->hist_ind + ppsed->longest_len - n) % ppsed->longest_len];
 }
 
+void print_history(Psed *ppsed) {
+  printf("hist_ind = %d\n", ppsed->hist_ind);
+  for (int k = 0; k < ppsed->longest_len; ++k) {
+    printf("%c ", ppsed->history[k]);
+  }
+  printf("\n");
+}
+
 void clear_history(Psed *ppsed) {
   for (int i = 0; i < ppsed->longest_len; ++i) *(ppsed->history + i) = -1;
   ppsed->hist_ind = 0;
-  ppsed->valid_hist_count = 0;  
+  ppsed->valid_hist_count = 0;
 }
 
 char advance(Psed *ppsed) {
@@ -20,12 +28,28 @@ char advance(Psed *ppsed) {
   int ll = ppsed->longest_len;
   // Dummy value to signify that no character was discarded when moving.
   char to_ret = -2;
-  if (vhc == ll) to_ret = *(ppsed->history + ppsed->hist_ind);
-  else ppsed->valid_hist_count += 1;
+  if (vhc == ll)
+    to_ret = *(ppsed->history + ppsed->hist_ind);
+  else
+    ppsed->valid_hist_count += 1;
   ppsed->history[ppsed->hist_ind] = c;
   ppsed->hist_ind = (ppsed->hist_ind + 1) % ppsed->longest_len;
   if (c == EOF) ppsed->eof_seen = true;
   return to_ret;
+}
+
+const char *process_history(Psed *ppsed, int match_ind) {
+  if (ppsed->valid_hist_count == ppsed->plengths[match_ind]) {
+    clear_history(ppsed);
+    advance(ppsed);
+    return ppsed->subs[match_ind];
+  } else {
+    ppsed->temp[0] =
+        ppsed->history[(ppsed->hist_ind + ppsed->longest_len - ppsed->valid_hist_count) %
+                       ppsed->longest_len];
+    --ppsed->valid_hist_count;
+    return ppsed->temp;
+  }
 }
 
 void init_psed(Psed *ppsed, const char **pats, const char **subs, int count) {
@@ -51,18 +75,16 @@ const char *next(Psed *ppsed) {
     for (int i = 0; i < ppsed->count; ++i) {
       int len = *(ppsed->plengths + i);
       if (len <= ppsed->valid_hist_count) {
-	bool is_match = true;
+        bool is_match = true;
         for (int j = 0; j < len; ++j) {
           if (ppsed->pats[i][j] != last_nth(ppsed, len - j)) {
             is_match = false;
             break;
           }
         }
-	if (is_match) {
-	  clear_history(ppsed);
-	  advance(ppsed);
-	  return ppsed->subs[i];
-	}
+        if (is_match) {
+          return process_history(ppsed, i);
+        }
       }
     }
     char discard = advance(ppsed);
@@ -72,6 +94,4 @@ const char *next(Psed *ppsed) {
     }
   }
 }
-void destroy_psed(Psed *ppsed) {
-  printf("TODO:");
-}
+void destroy_psed(Psed *ppsed) { printf("TODO:"); }
