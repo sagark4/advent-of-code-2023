@@ -14,12 +14,11 @@ typedef struct {
   int hist_ind;
   int valid_hist_count;
   bool eof_seen;
-  char *temp;
+  char temp[2];
 } Psed ;
 
 void init_psed(Psed *ppsed, const char **, const char **, int);
 const char *next(Psed *);
-char last_nth(Psed *, int n);
 void destroy_psed(Psed *);
 
 #endif // PSED_H

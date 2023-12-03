@@ -1,0 +1,28 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-std=c99",
+      "-c",
+      "-o",
+      "build/day_02.o",
+      "src/day_02.c"
+    ],
+    "directory": "/home/sag/repos/advent-of-code-2023",
+    "file": "/home/sag/repos/advent-of-code-2023/src/day_02.c",
+    "output": "/home/sag/repos/advent-of-code-2023/build/day_02.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-std=c99",
+      "-c",
+      "-o",
+      "build/psed.o",
+      "src/psed.c"
+    ],
+    "directory": "/home/sag/repos/advent-of-code-2023",
+    "file": "/home/sag/repos/advent-of-code-2023/src/psed.c",
+    "output": "/home/sag/repos/advent-of-code-2023/build/psed.o"
+  }
+]
