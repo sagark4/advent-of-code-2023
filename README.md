@@ -1,5 +1,12 @@
 # Advent of Code 2023
-My solutions and commentary for Advent of Code 2023 event
+My solutions and commentary for Advent of Code 2023 event.
+
+This needs `clang` (or if you have `gcc`, change the appropriate setting in `Makefile`). Then to run place all input files as, e.g., for Day 1 in two-digit format as `~/input/01.txt`, then
+
+```
+make all
+make run_all
+```
 
 ## Day 1
 
