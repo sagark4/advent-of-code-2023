@@ -95,4 +95,5 @@ int main() {
   }
   printf("%d\n", sum1);
   printf("%d\n", sum2);
+  return 0;
 }

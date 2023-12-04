@@ -119,4 +119,5 @@ int main() {
   }
   delete_dynarr_GameCollection(&gc);
   destroy_psed(&psed);
+  return 0;
 }

@@ -1,5 +1,12 @@
-CC          := clang -std=c99
-CFLAGS      := -g -Wall -Wextra -Werror
+CC          := clang -std=c99 -g 
+CFLAGS      := -Wall -Wextra -Werror
+
+build/day_04 : build/day_04.o
+	$(CC) build/day_04.o -o build/day_04
+	build/day_04 < ~/input/04.txt
+
+build/day_04.o : src/day_04.c
+	$(CC) -c src/day_04.c -o build/day_04.o
 
 build/day_02 : build/day_02.o build/psed.o
 	$(CC) build/day_02.o build/psed.o -o build/day_02
