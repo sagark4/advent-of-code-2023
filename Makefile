@@ -8,6 +8,13 @@ build/day_04 : build/day_04.o
 build/day_04.o : src/day_04.c
 	$(CC) -c src/day_04.c -o build/day_04.o
 
+build/day_03 : build/day_03.o
+	$(CC) build/day_03.o -o build/day_03
+	build/day_03 < ~/input/03.txt
+
+build/day_03.o : src/day_03.c
+	$(CC) -c src/day_03.c -o build/day_03.o
+
 build/day_02 : build/day_02.o build/psed.o
 	$(CC) build/day_02.o build/psed.o -o build/day_02
 	build/day_02 < ~/input/02.txt
