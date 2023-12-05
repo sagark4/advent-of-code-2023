@@ -120,10 +120,10 @@ int main() {
     }
   }
 
+  PointList cur_neighs;
+  init_dynarr_PointList(&cur_neighs);
   for (int i = 0; i < R; ++i) {
     int cur = 0;
-    PointList cur_neighs;
-    init_dynarr_PointList(&cur_neighs);
     int j = 0;
     while (j < C) {
       char c = arr[i][j];
@@ -142,12 +142,15 @@ int main() {
       ++j;
     }
   }
+  delete_dynarr_PointList(&cur_neighs);
   for (int i = 0; i < R; ++i) {
     for (int j = 0; j < C; ++j) {
       if (gear_neighbors[i][j].ct == 2)
         part2 += gear_neighbors[i][j].arr[0] * gear_neighbors[i][j].arr[1];
+      delete_dynarr_IntList(&gear_neighbors[i][j]);
     }
   }
   printf("%d\n", part2);
+
   return 0;
 }
