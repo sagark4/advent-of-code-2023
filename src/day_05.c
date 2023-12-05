@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 #include "include/dyn_arr.h"
 
@@ -35,6 +36,14 @@ typedef struct {
 } IntList;
 CREATE_DYN_ARR_FUNCS_STD_NAMES(IntList, long long, ct, cap, arr)
 
+long long map(long long s, MapList *pmp) {
+  for(int i = 0; i < pmp->ct; ++i) {
+    if(pmp->maps[i].s <= s && s < pmp->maps[i].s + pmp->maps[i].l)
+      return pmp->maps[i].d + s - pmp->maps[i].s;
+  }
+  return s;
+}
+
 int main() {
   for(int i = 0; i < 5; ++i) getchar();
   IntList seeds;
@@ -50,6 +59,14 @@ int main() {
     init_dynarr_MapList(&maps[i]);
     read_map(&maps[i]);
   }
+
+  long long ans1 = LLONG_MAX;
+  for(int i = 0; i < seeds.ct; ++i) {
+    long long s = seeds.arr[i];
+    for(int j = 0; j < 7; ++j) s = map(s, &maps[j]);
+    ans1 = ans1 < s ? ans1 : s;
+  }
+  printf("%lld\n", ans1);
 
   for(long long i = 0; i < 7; ++i) delete_dynarr_MapList(&maps[i]);
   return 0;
