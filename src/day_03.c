@@ -30,8 +30,8 @@ bool is_digit(char c) { return '0' <= c && c <= '9'; }
 bool is_valid(int r, int c) { return 0 <= r && r < R && 0 <= c && c < C; }
 
 bool point_list_contains(PointList *ppl, Point p) {
-  for(int i = 0; i < ppl->ct; ++i) {
-    if(p.r == ppl->points[i].r && p.c == ppl->points[i].c) return true;
+  for (int i = 0; i < ppl->ct; ++i) {
+    if (p.r == ppl->points[i].r && p.c == ppl->points[i].c) return true;
   }
   return false;
 }
@@ -58,7 +58,7 @@ void push_valid_unique_neighbors_onto(int r, int c, PointList *ppl) {
         Point p;
         p.r = r + i;
         p.c = c + j;
-        if(!point_list_contains(ppl, p)) push_PointList(ppl, p);
+        if (!point_list_contains(ppl, p)) push_PointList(ppl, p);
       }
     }
   }
