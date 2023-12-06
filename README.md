@@ -29,3 +29,6 @@ I have yet to do Day 3 in C, but Day 4 was easy enough to be done directly in C.
 ## Day 5
 
 As expected, input parsing in C took longer than coding up the logic.  Part 1 was basically passing the integers through the seven maps.  Part 2 was passing intervals through these maps.  This involved using `qsort()` in `stdlib.h`, because intervals must be sorted to process from left-to-right.  Running time is $O($ max-number-of-intervals $)$.
+
+## Day 6
+One can just brute-force it out, but I used the binary search approach to first find a valid solution and then separately to find lower and upper bounds on valid solutions.
