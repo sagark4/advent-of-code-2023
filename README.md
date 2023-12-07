@@ -32,3 +32,6 @@ As expected, input parsing in C took longer than coding up the logic.  Part 1 wa
 
 ## Day 6
 One can just brute-force it out, but I used the binary search approach to first find a valid solution and then separately to find lower and upper bounds on valid solutions.
+
+## Day 7
+Compute rank using the logic, then sort lexicographically using `qsort()` (lesson: the comparison function takes a _pointer_ to type of element, so in my case a `**`, i.e., pointer to a pointer).  For the second part, add the number of Js to the highest frequency card.
