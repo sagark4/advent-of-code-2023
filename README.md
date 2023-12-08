@@ -35,3 +35,13 @@ One can just brute-force it out, but I used the binary search approach to first 
 
 ## Day 7
 Compute rank using the logic, then sort lexicographically using `qsort()` (lesson: the comparison function takes a _pointer_ to type of element, so in my case a `**`, i.e., pointer to a pointer).  For the second part, add the number of Js to the highest frequency card.
+
+## Day 8
+I have suspended writing a C version for now; I'll probably come back to it afterwards.  I will keep uploading Python programs (without type hints).  Today's puzzle was the first one this year that seriously needed looking at the input.  Part 1 was straight forward.  For Part 2, I spent hours coding up an algorithm that would find cycles starting each node and do something with it only to realize that even computing those cycles was taking a lot of time.  Then I looked at only the nodes starting with "A" and found out the pattern: the "Z" ending nodes repeat after a fixed number of steps and there is exactly one "Z"-ending node in the path.  This is the property of the input, because the initial part of the path until the first node on the cycle must be as long as the path between the "Z"-ending node and the first node on the cycle.  See below: Let `z` be the only "Z"-ending node, then distance between `s` and `f` is same as distance between `z` and `f`.
+
+```
+s    f       z
+o-..-o--o-..-o-..-o--o-...-o
+     \____________________/
+```
+Also, these nodes are basically pairs of actual node and the position in the navigation instruction.  Without this pairing, it is not guaranteed that the cycle repeats.

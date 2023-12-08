@@ -52,6 +52,7 @@ run_all : all
 	build/day_05 < ~/input/05.txt
 	build/day_06 < ~/input/06.txt
 	build/day_07 < ~/input/07.txt
+	python src/day_08.py < ~/input/08.txt
 
 valgrind_all : all
 	valgrind build/day_01 < ~/input/01.txt
